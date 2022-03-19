@@ -11,6 +11,7 @@ class LoadingDialog {
 
     companion object {
 
+
         fun loader(context: Context): Dialog {
             val dialog = Dialog(context)
             val inflate = LayoutInflater.from(context).inflate(R.layout.loader, null)
