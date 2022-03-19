@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".8"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDate"
+                style="@style/textView"
+                android:text="Date" />
+
+            <TextView
+                android:id="@+id/txTotalConfirm"
+                style="@style/textView"
+                android:text="Total Confirm :" />
+
+            <TextView
+                android:id="@+id/txtTotalDecrease"
+                style="@style/textView"
+                android:text="Total Decrease : " />
+
+            <TextView
+                android:id="@+id/txtTotalRecovered"
+                style="@style/textView"
+                android:text="Total Recovered : " />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/rating_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".2"
+        android:src="@drawable/star_border" />
+</LinearLayout>

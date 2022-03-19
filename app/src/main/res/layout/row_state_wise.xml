@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".8"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtState"
+            style="@style/textView"
+            android:text="State" />
+
+        <TextView
+            android:id="@+id/txtActive"
+            style="@style/textView"
+            android:text="Activit" />
+
+        <TextView
+            android:id="@+id/txtRecovered"
+            style="@style/textView"
+            android:text="Recovered" />
+
+        <TextView
+            android:id="@+id/txtDeath"
+            style="@style/textView"
+            android:text="Deaths" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/rating_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".2"
+        android:src="@drawable/star_border" />
+
+</LinearLayout>
+
+
