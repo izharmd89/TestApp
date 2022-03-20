@@ -11,14 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.izharassignment.R
 import com.bws.izharassignment.constants.Common
 import com.bws.izharassignment.response.TestedData
 import com.bws.izharassignment.ui.LoadSourceActivity
 import com.bws.izharassignment.utils.NetworkUtils
-import com.bws.izharassignment.utils.alertDialog
+import com.bws.izharassignment.utils.MyAlertDialog
 import kotlinx.android.synthetic.main.dialog_test_details.*
 
 class TestAdapter(private val items: ArrayList<TestedData>) :
@@ -50,10 +49,9 @@ class TestAdapter(private val items: ArrayList<TestedData>) :
 
             if (NetworkUtils.isNetworkAvailable(context!!)) {
                 Common.sourceURL = items[position].source
-                Toast.makeText(context, Common.sourceURL, Toast.LENGTH_SHORT).show()
                 context?.startActivity(Intent(context, LoadSourceActivity::class.java))
             } else {
-                alertDialog().dialog(context!!)
+                MyAlertDialog().dialog(context!!)
             }
         }
 

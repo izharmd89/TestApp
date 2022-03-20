@@ -2,7 +2,6 @@ package com.bws.izharassignment.response
 
 
 data class CaseTimeSerese(
-
     val dailyconfirmed: String,
     val dailydeceased: String,
     val dailyrecovered: String,
@@ -11,7 +10,6 @@ data class CaseTimeSerese(
     val totalconfirmed: String,
     val totaldeceased: String,
     val totalrecovered: String
-
 )
 
 data class StateWise(

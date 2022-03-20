@@ -274,7 +274,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    //  INITIALIZE VIEWS
+    //INITIALISE VIEW MODEL
     private fun setUpViewModel() {
         val repository = Repository()
         val factory = ViewModelFactory(repository, this)
@@ -354,11 +354,10 @@ class MainActivity : AppCompatActivity() {
                     arrDataStateWise.add(data)
                 }
 
-                setUpTab()
-            } else {
-                Toast.makeText(this, "No state wise data found", Toast.LENGTH_SHORT).show()
-            }
 
+            } else {
+                Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show()
+            }
         })
 
         database.covidDAO().getTested().observe(this, Observer {
@@ -410,11 +409,12 @@ class MainActivity : AppCompatActivity() {
                     arrTestData.add(data)
                 }
 
-                // setUpTab()
+                 setUpTab()
             } else {
                 Toast.makeText(this, "No tested data found", Toast.LENGTH_SHORT).show()
             }
-
         })
+
+       // setUpTab()
     }
 }

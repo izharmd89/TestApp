@@ -11,7 +11,7 @@ import com.bws.izharassignment.R
 import com.bws.izharassignment.constants.Common.arrCases
 
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_case_time_series.view.*
+import kotlinx.android.synthetic.main.fragment_covid.view.*
 
 
 class CasesTimeSeriesFragment : Fragment() {
@@ -19,15 +19,21 @@ class CasesTimeSeriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater!!.inflate(R.layout.fragment_case_time_series, container, false)
-        view.recyCurrentOrder.layoutManager = LinearLayoutManager(context)
+        val view: View = inflater!!.inflate(R.layout.fragment_covid, container, false)
+        view.rvCovidData.layoutManager = LinearLayoutManager(context)
         val dividerDrawable =
             context?.let { ContextCompat.getDrawable(it, R.drawable.line_divider) }
-        view.recyCurrentOrder.addItemDecoration(DividerItemDecoration(dividerDrawable))
+        view.rvCovidData.addItemDecoration(DividerItemDecoration(dividerDrawable))
 
-        val adapter = CasesAdapter(arrCases)
-        view.recyCurrentOrder.adapter = adapter
-        adapter.notifyDataSetChanged()
+        if(arrCases.isNotEmpty()) {
+            view.txtNoDataFound.visibility = View.GONE
+            val adapter = CasesAdapter(arrCases)
+            view.rvCovidData.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }else{
+            view.txtNoDataFound.text = "Data not found"
+            view.txtNoDataFound.visibility = View.VISIBLE
+        }
         return view
     }
 }

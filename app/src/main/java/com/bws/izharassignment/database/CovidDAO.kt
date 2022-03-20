@@ -29,7 +29,6 @@ interface CovidDAO {
     fun getState(): LiveData<List<State>>
 
 
-
     //  FOR TESTED DATA===================
     @Insert
     suspend fun insertTested(tested: Tested)

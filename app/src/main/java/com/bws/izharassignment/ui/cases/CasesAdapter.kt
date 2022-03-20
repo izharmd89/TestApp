@@ -25,7 +25,6 @@ class CasesAdapter(private val items: ArrayList<CaseTimeSerese>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataItems = items[position]
-
         holder.txtDate.text = "Date : " + dataItems.date
         holder.txTotalConfirm.text = "Total Confirm : " + dataItems.totalconfirmed
         holder.txtTotalDecrease.text = "Total Decrease : " + dataItems.totaldeceased
@@ -42,7 +41,6 @@ class CasesAdapter(private val items: ArrayList<CaseTimeSerese>) :
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-
         val txtDate: TextView = itemView.findViewById(R.id.txtDate)
         val txTotalConfirm: TextView = itemView.findViewById(R.id.txTotalConfirm)
         val txtTotalDecrease: TextView = itemView.findViewById(R.id.txtTotalDecrease)

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/drawable-v24/star_border.xml" value="0.1275" />
+        <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/drawable/bg_rounded.xml" value="0.131" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/activity_main.xml" value="0.13385416666666666" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/activity_viewsource.xml" value="0.1" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/alert_dialog.xml" value="0.15694444444444444" />
@@ -11,6 +12,7 @@
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/dialog_state_details.xml" value="0.25" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/dialog_test_details.xml" value="0.14487179487179488" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/fragment_case_time_series.xml" value="0.1765625" />
+        <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/fragment_covid.xml" value="0.15185185185185185" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/loader.xml" value="0.1037037037037037" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/row_memes.xml" value="0.15" />
         <entry key="..\:/Users/BWS/Desktop/New folder (6)/IzharAssignment/app/src/main/res/layout/row_state_wise.xml" value="0.1" />

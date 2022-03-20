@@ -7,19 +7,15 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Cases::class, State::class, Tested::class], version = 1)
 abstract class CovidDatabase : RoomDatabase() {
+
     abstract fun covidDAO(): CovidDAO
 
-
     companion object {
-
         @Volatile
         private var INSTANCE: CovidDatabase? = null
-
         fun getDatabase(context: Context): CovidDatabase {
-
             if (INSTANCE == null) {
-
-                synchronized(this){
+                synchronized(this) {
                     INSTANCE =
                         Room.databaseBuilder(
                             context.applicationContext,

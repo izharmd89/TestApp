@@ -16,5 +16,4 @@ data class Cases(
     val totalconfirmed: String,
     val totaldeceased: String,
     val totalrecovered: String
-
 )

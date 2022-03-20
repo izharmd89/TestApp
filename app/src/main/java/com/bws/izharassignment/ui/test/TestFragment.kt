@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.izharassignment.R
-import com.bws.izharassignment.constants.Common
+import com.bws.izharassignment.constants.Common.arrTestData
 import com.dgreenhalgh.android.simpleitemdecoration.linear.DividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_case_time_series.view.*
+import kotlinx.android.synthetic.main.fragment_covid.view.*
 
 class TestFragment : Fragment() {
 
@@ -19,17 +19,22 @@ class TestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater!!.inflate(R.layout.fragment_case_time_series, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_covid, container, false)
 
-        view.recyCurrentOrder.layoutManager = LinearLayoutManager(context)
+        view.rvCovidData.layoutManager = LinearLayoutManager(context)
 
         val dividerDrawable =
             context?.let { ContextCompat.getDrawable(it, R.drawable.line_divider) }
-        view.recyCurrentOrder.addItemDecoration(DividerItemDecoration(dividerDrawable))
-
-        val adapter = TestAdapter(Common.arrTestData)
-        view.recyCurrentOrder.adapter = adapter
-        adapter.notifyDataSetChanged()
+        view.rvCovidData.addItemDecoration(DividerItemDecoration(dividerDrawable))
+        if (arrTestData.isNotEmpty()) {
+            view.txtNoDataFound.visibility = View.GONE
+            val adapter = TestAdapter(arrTestData)
+            view.rvCovidData.adapter = adapter
+            adapter.notifyDataSetChanged()
+        } else {
+            view.txtNoDataFound.text = "Data not found"
+            view.txtNoDataFound.visibility = View.VISIBLE
+        }
         return view
     }
 }
