@@ -284,9 +284,9 @@ class MainActivity : AppCompatActivity() {
 
     // SET UP TAB MENU
     private fun setUpTab() {
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Cases"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("State"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Test"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("CASES"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("STATE"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("TEST"))
 
         binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         adapter = MyAdapter(
@@ -328,10 +328,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     arrCases.add(data)
                 }
-            } else {
-                Toast.makeText(this, "No cases data found", Toast.LENGTH_SHORT).show()
             }
-
         })
 
         database.covidDAO().getState().observe(this, Observer {
@@ -353,10 +350,6 @@ class MainActivity : AppCompatActivity() {
                     )
                     arrDataStateWise.add(data)
                 }
-
-
-            } else {
-                Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -408,13 +401,8 @@ class MainActivity : AppCompatActivity() {
                     )
                     arrTestData.add(data)
                 }
-
                  setUpTab()
-            } else {
-                Toast.makeText(this, "No tested data found", Toast.LENGTH_SHORT).show()
             }
         })
-
-       // setUpTab()
     }
 }

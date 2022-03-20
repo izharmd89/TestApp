@@ -16,6 +16,9 @@
         android:text="No data found"
         android:visibility="gone"/>
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCovidData"
         android:layout_width="match_parent"
