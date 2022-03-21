@@ -3,7 +3,6 @@ package com.bws.izharassignment.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bws.izharassignment.R
@@ -15,7 +14,6 @@ import com.bws.izharassignment.database.CovidDatabase
 import com.bws.izharassignment.database.State
 import com.bws.izharassignment.database.Tested
 import com.bws.izharassignment.utils.Resources
-import com.bws.izharassignment.databinding.ActivityMainBinding
 import com.bws.izharassignment.factory.ViewModelFactory
 import com.bws.izharassignment.repository.Repository
 import com.bws.izharassignment.response.CaseTimeSerese
@@ -24,6 +22,7 @@ import com.bws.izharassignment.response.TestedData
 import com.bws.izharassignment.utils.LoadingDialog
 import com.bws.izharassignment.utils.NetworkUtils
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -32,14 +31,13 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     lateinit var covidViewModel: CovidViewModel
-    lateinit var binding: ActivityMainBinding
 
     lateinit var database: CovidDatabase
     lateinit var adapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         //INSTANCE FOR DATABASE
         database = CovidDatabase.getDatabase(this)
@@ -284,25 +282,25 @@ class MainActivity : AppCompatActivity() {
 
     // SET UP TAB MENU
     private fun setUpTab() {
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("CASES"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("STATE"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("TEST"))
+        tabLayout.addTab(tabLayout.newTab().setText("CASES"))
+        tabLayout.addTab(tabLayout.newTab().setText("STATE"))
+        tabLayout.addTab(tabLayout.newTab().setText("TEST"))
 
-        binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         adapter = MyAdapter(
             this, supportFragmentManager,
-            binding.tabLayout.tabCount
+            tabLayout.tabCount
         )
-        binding.viewPager.adapter = adapter
-        binding.viewPager.addOnPageChangeListener(
+        viewPager.adapter = adapter
+        viewPager.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(
-                binding.tabLayout
+                tabLayout
             )
         )
-        binding.tabLayout.addOnTabSelectedListener(object :
+        tabLayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.viewPager.currentItem = tab.position
+                viewPager.currentItem = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
