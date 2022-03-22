@@ -9,7 +9,7 @@ import com.bws.izharassignment.ui.state.StateWiseFragment
 import com.bws.izharassignment.ui.test.TestFragment
 
 
-class MyAdapter(
+class TabAdapter(
     var context: Context,
     fm: FragmentManager,
     var totalTabs: Int

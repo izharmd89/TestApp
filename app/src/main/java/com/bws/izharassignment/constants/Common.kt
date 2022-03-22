@@ -8,4 +8,5 @@ object Common {
     val arrDataStateWise = ArrayList<StateWise>()
     val arrTestData = ArrayList<TestedData>()
     var sourceURL = ""
+    var pullToRefresh = false
 }

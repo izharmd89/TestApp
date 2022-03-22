@@ -1,60 +1,106 @@
 package com.bws.izharassignment.ui
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bws.izharassignment.R
 import com.bws.izharassignment.constants.Common.arrCases
 import com.bws.izharassignment.constants.Common.arrDataStateWise
 import com.bws.izharassignment.constants.Common.arrTestData
+import com.bws.izharassignment.constants.Common.pullToRefresh
 import com.bws.izharassignment.database.Cases
 import com.bws.izharassignment.database.CovidDatabase
 import com.bws.izharassignment.database.State
 import com.bws.izharassignment.database.Tested
-import com.bws.izharassignment.utils.Resources
 import com.bws.izharassignment.factory.ViewModelFactory
 import com.bws.izharassignment.repository.Repository
 import com.bws.izharassignment.response.CaseTimeSerese
 import com.bws.izharassignment.response.StateWise
 import com.bws.izharassignment.response.TestedData
+import com.bws.izharassignment.utils.ConnectivityReceiver
 import com.bws.izharassignment.utils.LoadingDialog
 import com.bws.izharassignment.utils.NetworkUtils
+import com.bws.izharassignment.utils.Resources
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_covid.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
     lateinit var covidViewModel: CovidViewModel
 
     lateinit var database: CovidDatabase
-    lateinit var adapter: MyAdapter
+    lateinit var adapter: TabAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //REGISTER RECEIVER
+        registerReceiver(
+            ConnectivityReceiver(),
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
 
         //INSTANCE FOR DATABASE
         database = CovidDatabase.getDatabase(this)
 
         //INITIALISE VIEW MODEL
         setUpViewModel()
+    }
 
-        //CHECKING NETWORK AVAILABLE
-        if (NetworkUtils.isNetworkAvailable(this)) {
-            callAPI()
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        showNetworkMessage(isConnected)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
+    }
+
+
+    //CHECKING INTERNET CONNECTION
+    private fun showNetworkMessage(isConnected: Boolean) {
+        if (isConnected) {
+            txtConnection.text = "Online"
+            txtConnection.visibility = View.VISIBLE
+            txtConnection.setBackgroundColor(resources.getColor(R.color.green))
+            txtConnection.setTextColor(resources.getColor(R.color.black))
+            if (arrCases.isEmpty()) {
+                callAPI()
+            }
+            txtConnection.postDelayed(Runnable {
+                txtConnection.visibility = View.GONE
+            }, 3000)
+
         } else {
-            populateDataFromDatabase()
+            txtConnection.text = "Offline"
+            txtConnection.visibility = View.VISIBLE
+            txtConnection.setBackgroundColor(resources.getColor(R.color.red))
+            txtConnection.setTextColor(resources.getColor(R.color.white))
+            txtConnection.postDelayed(Runnable {
+                txtConnection.visibility = View.GONE
+            }, 3000)
+
+            if (arrCases.isEmpty()) {
+                populateDataFromDatabase()
+            }
         }
     }
 
     // POPULATE DATA VIA API
-    private fun callAPI() {
+    fun callAPI() {
         val loadingDialog = LoadingDialog.loader(this)
         covidViewModel.callDataAPI()
         covidViewModel.responseLiveData.observe(this, Observer {
@@ -63,11 +109,15 @@ class MainActivity : AppCompatActivity() {
                     loadingDialog.hide()
                 }
                 is Resources.Loading -> {
-                    loadingDialog.show()
+                    if (!pullToRefresh) {
+                        loadingDialog.show()
+                    } else {
+                        loadingDialog.hide()
+                    }
+
                 }
                 is Resources.Success -> {
                     loadingDialog.hide()
-
                     //DELETE OLD DATA FROM TABLE
                     GlobalScope.launch {
                         database.covidDAO().deleteCase()
@@ -255,11 +305,12 @@ class MainActivity : AppCompatActivity() {
                                     )
                                 )
                             }
-
                         }
 
                         //SET UP TAB MENU
-                        setUpTab()
+                        if (!pullToRefresh) {
+                            setUpTab()
+                        }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -287,7 +338,7 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addTab(tabLayout.newTab().setText("TEST"))
 
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        adapter = MyAdapter(
+        adapter = TabAdapter(
             this, supportFragmentManager,
             tabLayout.tabCount
         )
@@ -348,6 +399,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     arrDataStateWise.add(data)
                 }
+
             }
         })
 
@@ -399,7 +451,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     arrTestData.add(data)
                 }
-                 setUpTab()
+                setUpTab()
             }
         })
     }

@@ -10,11 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bws.izharassignment.R
 import com.bws.izharassignment.response.StateWise
+import com.bws.izharassignment.utils.ConnectivityReceiver
 import kotlinx.android.synthetic.main.dialog_cases_details.txtOk
 import kotlinx.android.synthetic.main.dialog_state_details.*
 
 class StateWiseAdapter(private val items: ArrayList<StateWise>) :
-    RecyclerView.Adapter<StateWiseAdapter.ViewHolder>() {
+    RecyclerView.Adapter<StateWiseAdapter.ViewHolder>(){
     private var context: Context? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =

@@ -17,7 +17,7 @@ import com.bws.izharassignment.constants.Common
 import com.bws.izharassignment.response.TestedData
 import com.bws.izharassignment.ui.LoadSourceActivity
 import com.bws.izharassignment.utils.NetworkUtils
-import com.bws.izharassignment.utils.MyAlertDialog
+import com.bws.izharassignment.utils.ConnectionAlertDialog
 import kotlinx.android.synthetic.main.dialog_test_details.*
 
 class TestAdapter(private val items: ArrayList<TestedData>) :
@@ -51,7 +51,7 @@ class TestAdapter(private val items: ArrayList<TestedData>) :
                 Common.sourceURL = items[position].source
                 context?.startActivity(Intent(context, LoadSourceActivity::class.java))
             } else {
-                MyAlertDialog().dialog(context!!)
+                ConnectionAlertDialog().dialog(context!!)
             }
         }
 

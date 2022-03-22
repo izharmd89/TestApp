@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bws.izharassignment.R
+import com.bws.izharassignment.constants.Common
 import com.bws.izharassignment.constants.Common.arrTestData
+import com.bws.izharassignment.ui.MainActivity
+import kotlinx.android.synthetic.main.fragment_covid.*
 import kotlinx.android.synthetic.main.fragment_covid.view.*
 
 class TestFragment : Fragment() {
@@ -29,6 +32,13 @@ class TestFragment : Fragment() {
         } else {
             view.txtNoDataFound.text = "Data not found"
             view.txtNoDataFound.visibility = View.VISIBLE
+        }
+
+        //PULL TO REFRESH
+        view.itemsswipetorefresh.setOnRefreshListener {
+            Common.pullToRefresh = true
+            (activity as MainActivity)?.callAPI()
+            itemsswipetorefresh.isRefreshing = false
         }
         return view
     }
